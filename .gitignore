@@ -1,0 +1,28 @@
+# Compiled bytecode
+*.class
+
+# Maven build output
+target/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# IDE metadata directory (Eclipse)
+.metadata/
+
+# Maven-specific files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# macOS specific files
+.DS_Store
