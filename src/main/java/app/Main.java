@@ -1,5 +1,5 @@
 package app;
-import utility.Window;
+import components.Window;
 
 /**
  * @author adamsloan

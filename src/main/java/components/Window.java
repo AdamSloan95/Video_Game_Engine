@@ -1,7 +1,7 @@
 /**
  * 
  */
-package utility;
+package components;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -10,6 +10,10 @@ import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+
+import input.KeyListener;
+import input.MouseListener;
+import utility.Time;
 
 /**
  * @author adamsloan
@@ -20,6 +24,8 @@ public class Window {
 	private int width, height;
 	private String title;
 	private long glfwWindow;
+	private float r, g, b, a;
+	private static Scene currentScene;
 
 	/*
 	 * Singleton method: Only one window will ever be needed and this along with the
@@ -31,6 +37,10 @@ public class Window {
 		this.width = 1920;
 		this.height = 1080;
 		this.title = "Buí";
+		r = 1;
+		b = 1;
+		g = 1;
+		a = 1;
 	}
 
 	public static Window get() {
@@ -38,6 +48,22 @@ public class Window {
 			Window.window = new Window();
 		}
 		return Window.window;
+	}
+
+	public static void changeScene(int newScene) {
+		switch (newScene) {
+		case 0:
+			currentScene = new LevelEditorScene();
+			window.fadeToBlack();
+			// currentScene.init();
+			break;
+		case 1:
+			currentScene = new LevelScene();
+			break;
+		default:
+			assert false : "Unknown scene " + newScene + "";
+			break;
+		}
 	}
 
 	public void run() {
@@ -112,52 +138,44 @@ public class Window {
 
 		GL.createCapabilities();
 
+		Window.changeScene(0);
+
 	}
 
 	public void loop() {
+
+		float beginTime = Time.getTime();
+		float endTime;
+		float dt = -1.0f;
+		
 		while (!glfwWindowShouldClose(glfwWindow)) {
+
 			// poll events
 			glfwPollEvents();
 
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
 			glClear(GL_COLOR_BUFFER_BIT);
-			
-			
-			/*
-			 * REMOVE
-			if(KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
-				System.out.println("Space");
+
+			currentScene.update(dt);
+
+			if (dt >= 0) {
+				currentScene.update(dt);
 			}
-			
-			
-			if(MouseListener.isDragging()) {
-				System.out.println("Dragging");
-			}
-			
-			if(MouseListener.mouseButtonDown(0)) {
-				System.out.println("click");
-			}
-			
-			if(MouseListener.mouseButtonDown(1)) {
-				System.out.println("click 2");
-			}
-			
-			
-			System.out.println("x: " + MouseListener.getScrollX() + "y: " + MouseListener.getScrollY());
-			
-			System.out.println("x: " + MouseListener.getX() + "y: " + MouseListener.getY());
-			
-			
-			*/
-			System.out.println("dx: " + MouseListener.getDx() + "dy: " + MouseListener.getDy());
-			
-			
-			
 
 			glfwSwapBuffers(glfwWindow);
+
+			// Get Delta time
+			endTime = Time.getTime();
+			dt = endTime - beginTime;
+			beginTime = endTime;
 		}
 
+	}
+
+	public void fadeToBlack() {
+		r = Math.max(r - 0.01f, 0);
+		g = Math.max(g - 0.01f, 0);
+		b = Math.max(b - 0.01f, 0);
 	}
 
 }
