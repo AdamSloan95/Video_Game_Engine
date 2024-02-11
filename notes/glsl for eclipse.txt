@@ -12,4 +12,4 @@ Then I restarted Eclipse:
 
 Stopped trying to open it in xCode! and syntax highlighting worked. 
 
-Config may need to be done if working in dark mode. 
+Config may need to be done if working in dark mode Eclipse>preferences>shader preferences and set the colours - default text is black so worthwhile doing this. 

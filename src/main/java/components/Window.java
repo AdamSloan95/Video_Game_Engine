@@ -100,9 +100,18 @@ public class Window {
 
 		// config GLFW
 		glfwDefaultWindowHints();
+		
+		//For mac with M1 Chip
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		
+		//as per tutorial
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+		
 
 		// Create Window
 		glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
