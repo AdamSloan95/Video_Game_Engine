@@ -54,11 +54,11 @@ public class Window {
 		switch (newScene) {
 		case 0:
 			currentScene = new LevelEditorScene();
-			window.fadeToBlack();
-			// currentScene.init();
+			currentScene.init();
 			break;
 		case 1:
 			currentScene = new LevelScene();
+			currentScene.init();
 			break;
 		default:
 			assert false : "Unknown scene " + newScene + "";
@@ -147,7 +147,7 @@ public class Window {
 		float beginTime = Time.getTime();
 		float endTime;
 		float dt = -1.0f;
-		
+
 		while (!glfwWindowShouldClose(glfwWindow)) {
 
 			// poll events
@@ -170,12 +170,6 @@ public class Window {
 			beginTime = endTime;
 		}
 
-	}
-
-	public void fadeToBlack() {
-		r = Math.max(r - 0.01f, 0);
-		g = Math.max(g - 0.01f, 0);
-		b = Math.max(b - 0.01f, 0);
 	}
 
 }
