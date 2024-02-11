@@ -4,7 +4,7 @@
 <h2>Goal</h2>
 <p> I am currently following a tutorial to create a Game Engine using Java.</p>
 <p> <a href="https://www.youtube.com/watch?v=025QFeZfeyM">Link to tutorial</a> </p>
-<p> <a href="https://www.youtube.com/watchv=vnqb9vdaxwA&list=PLtrSb4XxIVbp8AKuEAlwNXDxr99e3woGE&index=6)">Playlist version</a></p>
+<p> <a href="https://www.youtube.com/watch?v=VyKE7vz65rY&list=PLtrSb4XxIVbp8AKuEAlwNXDxr99e3woGE">Playlist version</a></p>
 
 </div>
 
