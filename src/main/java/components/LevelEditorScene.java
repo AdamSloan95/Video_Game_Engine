@@ -17,25 +17,26 @@ import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import renderer.Shader;
+import utility.Time;
 
 public class LevelEditorScene extends Scene {
 
 	private float[] vertexArray = {
-			// position 			//colour
-			100.5f, -0.5f, 0.0f, 		1.0f, 0.0f, 0.0f, 1.0f, // bottom right 0
-			-0.5f, 100.5f, 0.0f, 		0.0f, 1.0f, 0.0f, 1.0f, // top left 1
-			100.5f, 100.5f, 0.0f, 		0.0f, 0.0f, 1.0f, 1.0f, // top right 2
-			-0.5f, -0.5f, 0.0f, 	1.0f, 1.0f, 0.0f, 0.0f // bottom right 3
+			// position //colour
+			100.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // bottom right 0
+			-0.5f, 100.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // top left 1
+			100.5f, 100.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right 2
+			-0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f // bottom right 3
 
 	};
 
 	// IMPORTANT : MUST BE IN COUNTER-CLOCKWISE ORDER
 	private int[] elementArray = {
 			/*
-			 * X	 	X
+			 * X X
 			 * 
 			 * 
-			 * X 		X
+			 * X X
 			 * 
 			 */
 			2, 1, 0, // Top right triangle
@@ -46,21 +47,16 @@ public class LevelEditorScene extends Scene {
 	private Shader defaultShader;
 
 	public LevelEditorScene() {
-		
 
 	}
-
-
 
 	@Override
 	public void init() {
 		this.camera = new Camera(new Vector2f());
-		
+
 		defaultShader = new Shader("./assets/shaders/default.glsl");
 		defaultShader.compile();
 		defaultShader.link();
-		
-		
 
 		// Generate VAO, VBO and EBO buffer objects and send to GPU
 		vaoID = glGenVertexArrays();
@@ -90,37 +86,39 @@ public class LevelEditorScene extends Scene {
 		int vertexSizeBytes = (positionsSize + colourSize) * floatSizeBytes;
 		glVertexAttribPointer(0, positionsSize, GL_FLOAT, false, vertexSizeBytes, 0);
 		glEnableVertexAttribArray(0);
-		
-		glVertexAttribPointer(1, colourSize, GL_FLOAT, false, vertexSizeBytes, positionsSize*floatSizeBytes);
+
+		glVertexAttribPointer(1, colourSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * floatSizeBytes);
 		glEnableVertexAttribArray(1);
-		
-		
 
 	}
-	
+
 	@Override
 	public void update(float dt) {
+		camera.position.x -= dt * 50.0f;
+		camera.position.y -= dt * 20.0f;
+
 		defaultShader.use();
 		defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
 		defaultShader.uploadMat4f("uView", camera.getViewMatrix());
-		
-		//bind the vao that we're using 
+		defaultShader.uploadFloat("uTime", Time.getTime());
+
+		// bind the vao that we're using
 		glBindVertexArray(vaoID);
-		
-		//Enable the vertex Attribute Pointers
-		
+
+		// Enable the vertex Attribute Pointers
+
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-		
-		glDrawElements(GL_TRIANGLES, elementArray.length,GL_UNSIGNED_INT,0);
-		
-		//unbind
-		
+
+		glDrawElements(GL_TRIANGLES, elementArray.length, GL_UNSIGNED_INT, 0);
+
+		// unbind
+
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
-		
+
 		glBindVertexArray(0);
-		
+
 		defaultShader.detach();
 
 	}

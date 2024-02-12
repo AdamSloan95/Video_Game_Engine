@@ -18,11 +18,15 @@ void main()
 #type fragment
 #version 330 core
 
+uniform float uTime;
+
 in vec4 fColour;
 out vec4 colour;
 
-void main(){
-	colour = fColour;
+void main()
+{
+	float noise = fract(sin(dot(fColour.xy,vec2(12.9898,78.233))) * 43758.5453);
+	colour = fColour * noise;
 }
 	
 	
