@@ -24,7 +24,6 @@ public class Window {
 	private int width, height;
 	private String title;
 	private long glfwWindow;
-	private float r, g, b, a;
 	private static Scene currentScene;
 
 	/*
@@ -37,10 +36,6 @@ public class Window {
 		this.width = 1920;
 		this.height = 1080;
 		this.title = "Buí";
-		r = 1;
-		b = 1;
-		g = 1;
-		a = 1;
 	}
 
 	public static Window get() {
