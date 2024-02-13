@@ -1,39 +1,27 @@
-<h1>Video Game Engine</h1>
+# Video Game Engine
 
-<div>
-<h2>Goal</h2>
-<p> I am currently following a tutorial to create a Game Engine using Java.</p>
-<p> <a href="https://www.youtube.com/watch?v=025QFeZfeyM">Link to tutorial</a> </p>
-<p> <a href="https://www.youtube.com/watch?v=VyKE7vz65rY&list=PLtrSb4XxIVbp8AKuEAlwNXDxr99e3woGE">Playlist version</a></p>
-</div>
+## Goal
+I am currently following a tutorial to create a Game Engine using Java. My intention is to follow the tutorial and gain an understanding that will allow me to build out the game engine into something that I can use to create a game myself. 
 
-<div>
-<h2>Notes</h2>
-<p>As I encounter issues/things that I think might be handy for someone else following this tutorial I will try to keep a note.</p>
-<ol>
- <li><a href="/notes/Maven Troubleshooting.txt">Maven Troubleshooting and some mac OS quirks</a></li>
-  <li><a href="/notes/glsl for eclipse.txt">.glsl plugin for eclipse</a></li>
-  <li><a href="/notes/shader issues M1 Mac.txt">Shader Issues Mac M1</a></li>
-</ol>
-</div>
+- [Video](https://www.youtube.com/watch?v=025QFeZfeyM)
+- [Playlist Version](https://www.youtube.com/watch?v=VyKE7vz65rY&list=PLtrSb4XxIVbp8AKuEAlwNXDxr99e3woGE)
 
-<div>
-<h2>Tools</h2>
-<p>As I build I will try to keep a note of the tools I use either for coding or asset creation</p>
-<h3>Code</h3>
-  <ul>
-    <li>IDE: Eclipse</li>
-    <li>Build + Dependencies: Maven</li>
-  </ul>
-<h3>Libraries</h3>
-  <ul>
-    <li>LWJGL: customised as per tutorial see <a href="pom.xml">pom.xml</a></li>
-  </ul>
-<h3>Plugins</h3>
- <ul>
-    <li>Eclipse Shaders</a></li>
- </ul>
-</div>
+## Tools
+As I build I will try to keep a note of the tools I use either for coding or asset creation.
 
+### Code
+| Tool | Description |
+| ----------- | ----------- |
+| Eclipse | IDE : this is the main IDE I will use for the project |
+| Maven | For building  |
+| Eclipse Shaders | Plug-in for highlightling .glsl syntax within Eclipse|
 
+### Libraries
+| Tool | Description |
+| ----------- | ----------- |
+| LWJGL | Customised as per tutorial with some tweaks. Includes other packaged libraries, see: [pom.xml](pom.xml) |
 
+### Issues
+
+Even though I am working on this project by myself, I had been taking notes of problems I have faced along the way : originally via plain text files
+I have decided that i will log these in the [Issues](https://github.com/AdamSloan95/Video_Game_Engine/issues) section incase they are useful anyone else following the tutorial but doing things slightly different as I am. 
