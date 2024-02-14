@@ -3,15 +3,18 @@
 	
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec4 aColour;
+layout (location = 2) in vec2 aTexCoords;
 
 uniform mat4 uProjection;
 uniform mat4 uView;
 	
 out vec4 fColour;
+out vec2 fTexCoords;
 	
 void main()
 {
 	fColour = aColour;
+	fTexCoords = aTexCoords;
 	gl_Position = uProjection * uView *vec4(aPos,1.0);
 }
 
@@ -19,14 +22,16 @@ void main()
 #version 330 core
 
 uniform float uTime;
+uniform sampler2D TEX_SAMPLER;
 
 in vec4 fColour;
+in vec2 fTexCoords;
+
 out vec4 colour;
 
 void main()
 {
-	float noise = fract(sin(dot(fColour.xy,vec2(12.9898,78.233))) * 43758.5453);
-	colour = fColour * noise;
+	colour = texture(TEX_SAMPLER, fTexCoords);
 }
 	
 	
