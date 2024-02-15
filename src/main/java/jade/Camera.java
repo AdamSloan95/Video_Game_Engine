@@ -1,7 +1,7 @@
 /**
  * 
  */
-package components;
+package jade;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;

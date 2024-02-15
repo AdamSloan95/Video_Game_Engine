@@ -1,7 +1,7 @@
 /**
  * 
  */
-package components;
+package jade;
 
 /**
  * @author adamsloan
@@ -16,6 +16,8 @@ import java.nio.IntBuffer;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
+import components.FontRenderer;
+import components.SpriteRenderer;
 import renderer.Shader;
 import renderer.Texture;
 import utility.Time;
@@ -47,6 +49,9 @@ public class LevelEditorScene extends Scene {
 	private int vaoID, vboID, eboID;
 	private Shader defaultShader;
 	private Texture testTexture;
+	
+	GameObject testObj;
+	private boolean firstTime = false;
 
 	public LevelEditorScene() {
 
@@ -54,6 +59,13 @@ public class LevelEditorScene extends Scene {
 
 	@Override
 	public void init() {
+		System.out.println("creating test object");
+		this.testObj = new GameObject("test object");
+		this.testObj.addComponent(new SpriteRenderer());
+		this.testObj.addComponent(new FontRenderer());
+		this.addGameObjectToScene(this.testObj);
+		
+		
 		this.camera = new Camera(new Vector2f());
 
 		defaultShader = new Shader("./assets/shaders/default.glsl");
@@ -134,6 +146,20 @@ public class LevelEditorScene extends Scene {
 		glBindVertexArray(0);
 
 		defaultShader.detach();
+		
+		
+		if(!firstTime) {
+			System.out.println("Creating Game Object");
+			GameObject go = new GameObject("Game Test 2");
+			go.addComponent(new SpriteRenderer());
+			this.addGameObjectToScene(go);
+			firstTime = true;
+		}
+		
+		
+		for (GameObject go : this.gameObjects) {
+			go.update(dt);
+		}
 
 	}
 
