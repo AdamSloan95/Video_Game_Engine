@@ -1,5 +1,5 @@
 package app;
-import components.Window;
+import jade.Window;
 
 /**
  * @author adamsloan
