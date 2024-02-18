@@ -169,15 +169,6 @@ public class Shader {
 		glUniformMatrix3fv(varLocation, false, matBuffer);
 	}
 
-	public void uploadMat2f(String varName, Matrix2f mat2) {
-		int varLocation = glGetUniformLocation(shaderProgramID, varName);
-		use();
-		FloatBuffer matBuffer = BufferUtils.createFloatBuffer(4);
-		mat2.get(matBuffer);
-
-		glUniformMatrix2fv(varLocation, false, matBuffer);
-	}
-
 	/*
 	 * Vector uploads
 	 */

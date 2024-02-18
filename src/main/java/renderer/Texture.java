@@ -26,6 +26,8 @@ public class Texture {
 		
 		//generate texture on GPU
 		textureID = glGenTextures();
+		
+		
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		
 		

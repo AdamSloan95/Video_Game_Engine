@@ -1,0 +1,12 @@
+{
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "Debug (Launch) with Arguments Prompt",
+            "request": "launch",
+            "mainClass": "com.myapp.Main",
+            "args": "${command:SpecifyProgramArgs}",
+            "vmArgs" : "${command:SpecifyVMArgs}"
+        }
+}
