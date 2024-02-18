@@ -24,7 +24,9 @@ public class Window {
 	private int width, height;
 	private String title;
 	private long glfwWindow;
-	private static Scene currentScene;
+
+	public float r, g, b, a;
+	private boolean fadeToBlack = false;
 
 	/*
 	 * Singleton method: Only one window will ever be needed and this along with the
@@ -32,21 +34,16 @@ public class Window {
 	 */
 	private static Window window = null;
 
+	private static Scene currentScene;
+
 	private Window() {
 		this.width = 1920;
 		this.height = 1080;
 		this.title = "Buí";
-	}
-
-	public static Window get() {
-		if (Window.window == null) {
-			Window.window = new Window();
-		}
-		return Window.window;
-	}
-	
-	public static Scene getScene() {
-		return get().currentScene;
+		r = 1;
+		b = 1;
+		g = 1;
+		a = 1;
 	}
 
 	public static void changeScene(int newScene) {
@@ -65,6 +62,18 @@ public class Window {
 			assert false : "Unknown scene " + newScene + "";
 			break;
 		}
+	}
+	
+
+	public static Window get() {
+		if (Window.window == null) {
+			Window.window = new Window();
+		}
+		return Window.window;
+	}
+
+	public static Scene getScene() {
+		return get().currentScene;
 	}
 
 	public void run() {
@@ -101,18 +110,17 @@ public class Window {
 
 		// config GLFW
 		glfwDefaultWindowHints();
-		
-		//For mac with M1 Chip
+
+		// as per tutorial
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+
+		// For mac with M1 Chip
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		
-		//as per tutorial
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-		glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
-		
 
 		// Create Window
 		glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
@@ -159,14 +167,11 @@ public class Window {
 		float dt = -1.0f;
 
 		while (!glfwWindowShouldClose(glfwWindow)) {
-
-			// poll events
+			// Poll events
 			glfwPollEvents();
 
-			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			glClearColor(r, g, b, a);
 			glClear(GL_COLOR_BUFFER_BIT);
-
-			currentScene.update(dt);
 
 			if (dt >= 0) {
 				currentScene.update(dt);
@@ -174,7 +179,6 @@ public class Window {
 
 			glfwSwapBuffers(glfwWindow);
 
-			// Get Delta time
 			endTime = Time.getTime();
 			dt = endTime - beginTime;
 			beginTime = endTime;
