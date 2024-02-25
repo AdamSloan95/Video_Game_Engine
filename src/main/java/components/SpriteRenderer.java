@@ -3,13 +3,14 @@ package components;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import jade.Component;
+import jade.Transform;
 import renderer.Texture;
 
 public class SpriteRenderer extends Component {
+	
 	private Vector4f colour;
-	private Vector2f[] texCoords;
-	private Texture texture;
 	private Sprite sprite;
+	private Transform lastTransform;
 
 	public SpriteRenderer(Vector4f colour) {
 		this.colour = colour;
@@ -42,5 +43,15 @@ public class SpriteRenderer extends Component {
 	public Vector2f[] getTexCoords() {
 		return sprite.getTexCoords();
 	}
+
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
+	
+	public void setColour(Vector4f colour) {
+		this.colour.set(colour);
+	}
+	
 
 }
